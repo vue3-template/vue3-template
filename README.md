@@ -55,10 +55,43 @@ npm run dev
 }
 ```
 
-## 页面 src/views/
-创建对应路由文件夹
+## 权限
 
-在src/router/ import即可
+```
+// src/permission.ts 定义权限
+export default Object.freeze({
+  Log: 1,
+  ShowLoginLogPage: 2,
+})
+
+// src/router/*.ts 路由权限
+{
+  ...
+  children: [
+    {
+      ...
+      permissions: [permission.ShowLoginLogPage],
+    }
+  ]
+}
+
+// src/components/Permission/*.ts 组件权限
+<script lang="ts" setup>
+import pms from '@/permission'
+import { Button } from '@/components/Permission'
+</script>
+<template>
+  <Button 
+    :permissions="[pms.Log]"
+    type="primary"
+  >
+    text
+  </Button>
+</template>
+
+```
+
+
 
 ## 接口 src/api/
 
